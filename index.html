@@ -151,12 +151,16 @@ main{
     <div class="bar"><div id="bar"></div></div>
   </section>
 
-  <div class="tabs">
-    <button class="active" onclick="setFilter('ALL',this)">ALL</button>
-    <button onclick="setFilter('Group',this)">GROUP</button>
-    <button onclick="setFilter('Unit',this)">UNIT</button>
-    <button onclick="setFilter('Solo',this)">SOLO</button>
-  </div>
+<div class="tabs">
+  <button class="active" onclick="setFilter('ALL',this)">ALL</button>
+  <button onclick="setFilter('Group',this)">GROUP</button>
+  <button onclick="setFilter('Unit',this)">UNIT</button>
+  <button onclick="setFilter('Solo',this)">SOLO</button>
+</div>
+
+<div id="artistTabs" class="tabs"></div>
+
+<div id="countryTabs" class="tabs"></div>
 
   <section id="grid" class="grid"></section>
 </main>
@@ -191,6 +195,8 @@ const albums=[
 ];
 
 let current="ALL";
+let currentArtist="ALL";
+let currentCountry="ALL";
 const key="sj_album_";
 
 function isOwned(id){
@@ -204,8 +210,79 @@ function toggle(id){
 
 function setFilter(cat,btn){
   current=cat;
-  document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
+  currentArtist="ALL";
+  currentCountry="ALL";
+
+  document.querySelectorAll("main > .tabs:first-of-type button").forEach(b=>b.classList.remove("active"));
   btn.classList.add("active");
+
+  renderSubTabs();
+  render();
+}
+
+function renderSubTabs(){
+  const artistTabs=document.getElementById("artistTabs");
+  const countryTabs=document.getElementById("countryTabs");
+
+  artistTabs.innerHTML="";
+  countryTabs.innerHTML="";
+
+  if(current==="Solo"){
+    artistTabs.innerHTML=`
+      <button class="active" onclick="setArtist('ALL',this)">ALL SOLO</button>
+      <button onclick="setArtist('Yesung',this)">Yesung</button>
+      <button onclick="setArtist('Kyuhyun',this)">Kyuhyun</button>
+      <button onclick="setArtist('Ryeowook',this)">Ryeowook</button>
+      <button onclick="setArtist('Donghae',this)">Donghae</button>
+      <button onclick="setArtist('Eunhyuk',this)">Eunhyuk</button>
+    `;
+  }
+
+  if(current==="Unit"){
+    artistTabs.innerHTML=`
+      <button class="active" onclick="setArtist('ALL',this)">ALL UNIT</button>
+      <button onclick="setArtist('D&E',this)">D&E</button>
+      <button onclick="setArtist('K.R.Y.',this)">K.R.Y.</button>
+      <button onclick="setArtist('M',this)">M</button>
+      <button onclick="setArtist('T',this)">T</button>
+      <button onclick="setArtist('H',this)">H</button>
+      <button onclick="setArtist('L.S.S.',this)">L.S.S.</button>
+    `;
+  }
+
+  if(current==="Group"){
+    showCountryTabs();
+  }
+}
+
+function setArtist(artist,btn){
+  currentArtist=artist;
+  currentCountry="ALL";
+
+  document.querySelectorAll("#artistTabs button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+
+  showCountryTabs();
+  render();
+}
+
+function showCountryTabs(){
+  const countryTabs=document.getElementById("countryTabs");
+
+  countryTabs.innerHTML=`
+    <button class="active" onclick="setCountry('ALL',this)">ALL COUNTRY</button>
+    <button onclick="setCountry('Korea',this)">Korea</button>
+    <button onclick="setCountry('Japan',this)">Japan</button>
+    <button onclick="setCountry('Taiwan',this)">Taiwan</button>
+  `;
+}
+
+function setCountry(country,btn){
+  currentCountry=country;
+
+  document.querySelectorAll("#countryTabs button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+
   render();
 }
 
@@ -213,7 +290,19 @@ function render(){
   const grid=document.getElementById("grid");
   grid.innerHTML="";
 
-  const list=current==="ALL"?albums:albums.filter(a=>a.cat===current);
+let list=albums;
+
+if(current!=="ALL"){
+  list=list.filter(a=>a.cat===current);
+}
+
+if(currentArtist!=="ALL"){
+  list=list.filter(a=>a.artist===currentArtist);
+}
+
+if(currentCountry!=="ALL"){
+  list=list.filter(a=>a.country===currentCountry);
+}
 
   list.forEach(a=>{
     const owned=isOwned(a.id);
