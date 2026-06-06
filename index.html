@@ -105,7 +105,6 @@ main{
   filter:grayscale(100%) brightness(70%);
   transition:0.3s;
 }
-
 .cover img.owned{
   filter:none;
 }
@@ -183,7 +182,8 @@ const albums=[
   {id:"pink-magic-magic",cat:"Solo",artist:"Yesung",album:"Pink Magic",ver:"Magic Ver",country:"Korea",year:"2019",image:"images/pink-magic-magic.jpg"},
   {id:"pink-magic-pink",cat:"Solo",artist:"Yesung",album:"Pink Magic",ver:"Pink Ver",country:"Korea",year:"2019",image:"images/pink-magic-pink.jpg"},
   {id:"yesung-sensory",cat:"Solo",artist:"Yesung",album:"Sensory Flows",ver:"Regular",country:"Korea",year:"2023"}
-  ];
+];
+
 let current="ALL";
 const key="sj_album_";
 
@@ -209,38 +209,26 @@ function render(){
 
   const list=current==="ALL"?albums:albums.filter(a=>a.cat===current);
 
-list.forEach(a=>{
-  const owned=isOwned(a.id);
+  list.forEach(a=>{
+    const owned=isOwned(a.id);
 
-  grid.innerHTML += `
-    <div class="card">
+    grid.innerHTML += `
+      <div class="card">
+        <div class="cover">
+          ${
+            a.image
+            ? `<img src="${a.image}" class="${owned ? 'owned' : ''}">`
+            : `${a.album}<br>${a.ver}`
+          }
+        </div>
 
-      <div class="cover">
-        ${
-          a.image
-          ? `<img src="${a.image}" class="${owned ? 'owned' : ''}">`
-          : `${a.album}<br>${a.ver}`
-        }
-      </div>
-
-      <div class="info">
-        <div class="album">${a.album}</div>
-        <div class="meta">${a.artist}</div>
-        <div class="meta">${a.ver}｜${a.country}｜${a.year}</div>
-
-        <button class="heart ${owned ? 'owned' : ''}" onclick="toggle('${a.id}')">
-          ${owned ? '♥ 已收藏' : '♡ 未收藏'}
-        </button>
-
-      </div>
-    </div>
-  `;
-});
+        <div class="info">
           <div class="album">${a.album}</div>
           <div class="meta">${a.artist}</div>
           <div class="meta">${a.ver}｜${a.country}｜${a.year}</div>
-          <button class="heart ${owned?'owned':''}" onclick="toggle('${a.id}')">
-            ${owned?'♥ 已收藏':'♡ 未收藏'}
+
+          <button class="heart ${owned ? 'owned' : ''}" onclick="toggle('${a.id}')">
+            ${owned ? '♥ 已收藏' : '♡ 未收藏'}
           </button>
         </div>
       </div>
