@@ -98,6 +98,17 @@ main{
   font-weight:bold;
   padding:12px;
 }
+.cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:grayscale(100%) brightness(70%);
+  transition:0.3s;
+}
+
+.cover img.owned{
+  filter:none;
+}
 .info{
   padding:12px;
 }
@@ -198,20 +209,33 @@ function render(){
 
   const list=current==="ALL"?albums:albums.filter(a=>a.cat===current);
 
-  list.forEach(a=>{
-    const owned=isOwned(a.id);
-    grid.innerHTML+=`
-      <div class="card">
-        <div class="cover">
-         ${
+list.forEach(a=>{
+  const owned=isOwned(a.id);
+
+  grid.innerHTML += `
+    <div class="card">
+
+      <div class="cover">
+        ${
           a.image
-          <img src="${a.image}"
-     style="width:100%;height:100%;object-fit:cover;"
-     onerror="this.parentElement.innerHTML='圖片讀取失敗';">
+          ? `<img src="${a.image}" class="${owned ? 'owned' : ''}">`
           : `${a.album}<br>${a.ver}`
         }
       </div>
-        <div class="info">
+
+      <div class="info">
+        <div class="album">${a.album}</div>
+        <div class="meta">${a.artist}</div>
+        <div class="meta">${a.ver}｜${a.country}｜${a.year}</div>
+
+        <button class="heart ${owned ? 'owned' : ''}" onclick="toggle('${a.id}')">
+          ${owned ? '♥ 已收藏' : '♡ 未收藏'}
+        </button>
+
+      </div>
+    </div>
+  `;
+});
           <div class="album">${a.album}</div>
           <div class="meta">${a.artist}</div>
           <div class="meta">${a.ver}｜${a.country}｜${a.year}</div>
