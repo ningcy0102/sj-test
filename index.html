@@ -101,6 +101,11 @@ main{
   font-weight:bold;
   color:#1d4ed8;
 }
+.sectionName{
+  color:#0f2d5c;
+  font-weight:bold;
+  margin:16px 0 10px;
+}
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
@@ -185,13 +190,12 @@ main{
   </section>
 
   <div class="tabs">
-    <button class="active" onclick="setMain('ALL',this)">ALL</button>
-    <button onclick="setMain('Group',this)">GROUP</button>
-    <button onclick="setMain('Unit',this)">UNIT</button>
-    <button onclick="setMain('Solo',this)">SOLO</button>
+    <button onclick="setMain('Super Junior',this)">Super Junior</button>
+    <button onclick="setMain('Unit',this)">Unit</button>
+    <button onclick="setMain('SOLO',this)">SOLO</button>
   </div>
 
-  <div id="artistTabs" class="tabs"></div>
+  <div id="memberTabs" class="tabs"></div>
   <div id="countryTabs" class="tabs"></div>
   <div id="typeTabs" class="tabs"></div>
 
@@ -204,141 +208,203 @@ main{
 <script>
 const albums=[
   {
-    id:"yesung-here-i-am-regular",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Korea",
-    type:"迷你一輯",
-    album:"Here I Am",
-    ver:"Regular",
-    year:"2016"
-  },
-  {
-    id:"yesung-spring-falling-regular",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Korea",
-    type:"迷你二輯",
-    album:"Spring Falling",
-    ver:"Regular",
-    year:"2017"
-  },
-  {
-    id:"yesung-pink-magic-magic",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Korea",
+    id:"yesung-pink-magic-normal-pink",
+    main:"SOLO",
+    member:"Yesung",
+    country:"韓國",
     type:"迷你三輯",
     album:"Pink Magic",
-    ver:"Magic Ver",
-    year:"2019",
-    image:"images/pink-magic-magic.jpg"
-  },
-  {
-    id:"yesung-pink-magic-pink",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Korea",
-    type:"迷你三輯",
-    album:"Pink Magic",
-    ver:"Pink Ver",
+    version:"通常盤 Pink",
     year:"2019",
     image:"images/pink-magic-pink.jpg"
   },
   {
+    id:"yesung-pink-magic-normal-gray",
+    main:"SOLO",
+    member:"Yesung",
+    country:"韓國",
+    type:"迷你三輯",
+    album:"Pink Magic",
+    version:"通常盤 Gray",
+    year:"2019",
+    image:"images/pink-magic-magic.jpg"
+  },
+  {
+    id:"yesung-pink-magic-smart-pink",
+    main:"SOLO",
+    member:"Yesung",
+    country:"韓國",
+    type:"迷你三輯",
+    album:"Pink Magic",
+    version:"智能版 Pink",
+    year:"2019"
+  },
+  {
+    id:"yesung-pink-magic-smart-gray",
+    main:"SOLO",
+    member:"Yesung",
+    country:"韓國",
+    type:"迷你三輯",
+    album:"Pink Magic",
+    version:"智能版 Gray",
+    year:"2019"
+  },
+
+  {
+    id:"yesung-here-i-am-regular",
+    main:"SOLO",
+    member:"Yesung",
+    country:"韓國",
+    type:"迷你一輯",
+    album:"Here I Am",
+    version:"Regular",
+    year:"2016"
+  },
+  {
+    id:"yesung-spring-falling-regular",
+    main:"SOLO",
+    member:"Yesung",
+    country:"韓國",
+    type:"迷你二輯",
+    album:"Spring Falling",
+    version:"Regular",
+    year:"2017"
+  },
+  {
     id:"yesung-beautiful-night-regular",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Korea",
+    main:"SOLO",
+    member:"Yesung",
+    country:"韓國",
     type:"迷你四輯",
     album:"Beautiful Night",
-    ver:"Regular",
+    version:"Regular",
     year:"2021"
   },
   {
-    id:"yesung-unfading-sense-diary",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Korea",
-    type:"迷你五輯",
-    album:"Unfading Sense",
-    ver:"Diary Ver",
-    year:"2023"
-  },
-  {
-    id:"yesung-unfading-sense-memory",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Korea",
-    type:"迷你五輯",
-    album:"Unfading Sense",
-    ver:"Memory Ver",
-    year:"2023"
-  },
-  {
-    id:"yesung-its-complicated-regular",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Korea",
-    type:"迷你六輯",
-    album:"It's Complicated",
-    ver:"Regular",
-    year:"2024"
-  },
-  {
     id:"yesung-sensory-flows-regular",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Korea",
+    main:"SOLO",
+    member:"Yesung",
+    country:"韓國",
     type:"正規一輯",
     album:"Sensory Flows",
-    ver:"Regular",
+    version:"Regular",
     year:"2023"
   },
   {
     id:"yesung-floral-sense-regular",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Korea",
+    main:"SOLO",
+    member:"Yesung",
+    country:"韓國",
     type:"特別專輯",
     album:"Floral Sense",
-    ver:"Regular",
+    version:"Regular",
     year:"2023"
   },
   {
+    id:"yesung-unfading-sense-diary",
+    main:"SOLO",
+    member:"Yesung",
+    country:"韓國",
+    type:"迷你五輯",
+    album:"Unfading Sense",
+    version:"Diary Ver",
+    year:"2023"
+  },
+  {
+    id:"yesung-unfading-sense-memory",
+    main:"SOLO",
+    member:"Yesung",
+    country:"韓國",
+    type:"迷你五輯",
+    album:"Unfading Sense",
+    version:"Memory Ver",
+    year:"2023"
+  },
+  {
+    id:"yesung-its-complicated-regular",
+    main:"SOLO",
+    member:"Yesung",
+    country:"韓國",
+    type:"迷你六輯",
+    album:"It's Complicated",
+    version:"Regular",
+    year:"2024"
+  },
+
+  {
     id:"yesung-story-regular",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Japan",
-    type:"日本正規一輯",
+    main:"SOLO",
+    member:"Yesung",
+    country:"日本",
+    type:"正規1",
     album:"STORY",
-    ver:"Regular",
+    version:"Regular",
     year:"2019"
-  },
-  {
-    id:"yesung-ame-nochi-regular",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Japan",
-    type:"日本單曲",
-    album:"雨のち晴れの空の色",
-    ver:"Regular",
-    year:"2016"
-  },
-  {
-    id:"yesung-splash-regular",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Japan",
-    type:"日本單曲",
-    album:"Splash",
-    ver:"Regular",
-    year:"2017"
   }
 ];
 
-let currentCat="ALL";
-let currentArtist="";
+const structure={
+  "Super Junior":{
+    countries:{
+      "韓國":["正規1","單曲1","正規2","正規3","正規4","正規5","正規6","正規7","特別專輯","正規8","特別迷你專輯","正規9","正規10","特別單曲","正規11","正規12"],
+      "日本":["改編單曲","特別單曲","二輯日版","三輯日版","單曲1","單曲2","單曲3","單曲4","正規1","單曲5","單曲6","單曲7","單曲8","單曲9","迷你1","正規2"]
+    }
+  },
+  "Unit":{
+    members:["K.R.Y.","T","Happy","M","D&E","L.S.S.","83z"],
+    countries:{
+      "K.R.Y.":{
+        "韓國":[],
+        "日本":["單曲1","單曲2","單曲3"]
+      },
+      "T":{
+        "韓國":[],
+        "日本":[]
+      },
+      "Happy":{},
+      "M":{
+        "韓國":[],
+        "日本":[],
+        "台灣":["正規1","迷你1","迷你2","正規2","迷你3"]
+      },
+      "D&E":{
+        "韓國":["迷你1","迷你2","迷你3","迷你4","正規1","迷你5","迷你6"],
+        "日本":["正規1","迷你1","正規2","迷你2"]
+      },
+      "L.S.S.":{
+        "韓國":[],
+        "日本":["單曲1","單曲2","迷你1","單曲3"]
+      },
+      "83z":{}
+    }
+  },
+  "SOLO":{
+    members:["Heechul","Yesung","Eunhyuk","Donghae","Ryeowook","Kyuhyun"],
+    countries:{
+      "Heechul":{},
+      "Yesung":{
+        "韓國":["迷你一輯","迷你二輯","迷你三輯","迷你四輯","正規一輯","特別專輯","迷你五輯","迷你六輯"],
+        "日本":["單曲1","單曲2","正規1","迷你1","單曲4","正規2"]
+      },
+      "Eunhyuk":{
+        "韓國":["迷你1"],
+        "日本":["迷你1"]
+      },
+      "Donghae":{},
+      "Ryeowook":{
+        "韓國":["迷你1","迷你2","迷你3"],
+        "日本":["單曲1","單曲2"]
+      },
+      "Kyuhyun":{
+        "韓國":["迷你1","迷你2","迷你3","單曲1","單曲2","迷你4","EP1正規1","EP2"],
+        "日本":["單曲1","正規1"]
+      }
+    }
+  }
+};
+
+let currentMain="";
+let currentMember="";
 let currentCountry="";
 let currentType="";
 
@@ -353,13 +419,9 @@ function toggle(id){
   render();
 }
 
-function unique(arr){
-  return [...new Set(arr)].filter(Boolean);
-}
-
-function setMain(cat,btn){
-  currentCat=cat;
-  currentArtist="";
+function setMain(main,btn){
+  currentMain=main;
+  currentMember="";
   currentCountry="";
   currentType="";
 
@@ -370,12 +432,12 @@ function setMain(cat,btn){
   render();
 }
 
-function setArtist(artist,btn){
-  currentArtist=artist;
+function setMember(member,btn){
+  currentMember=member;
   currentCountry="";
   currentType="";
 
-  document.querySelectorAll("#artistTabs button").forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll("#memberTabs button").forEach(b=>b.classList.remove("active"));
   btn.classList.add("active");
 
   renderTabs();
@@ -403,42 +465,35 @@ function setType(type,btn){
 }
 
 function renderTabs(){
-  const artistTabs=document.getElementById("artistTabs");
+  const memberTabs=document.getElementById("memberTabs");
   const countryTabs=document.getElementById("countryTabs");
   const typeTabs=document.getElementById("typeTabs");
 
-  artistTabs.innerHTML="";
+  memberTabs.innerHTML="";
   countryTabs.innerHTML="";
   typeTabs.innerHTML="";
 
-  if(currentCat==="Solo"){
-    const soloArtists=["Heechul","Yesung","Eunhyuk","Donghae","Ryeowook","Kyuhyun"];
+  if(!currentMain) return;
 
-    artistTabs.innerHTML=soloArtists.map(a=>`
-      <button class="${currentArtist===a?'active':''}" onclick="setArtist('${a}',this)">${a}</button>
+  if(currentMain==="SOLO" || currentMain==="Unit"){
+    const members=structure[currentMain].members;
+
+    memberTabs.innerHTML=members.map(m=>`
+      <button class="${currentMember===m?'active':''}" onclick="setMember('${m}',this)">${m}</button>
     `).join("");
   }
 
-  if(currentCat==="Unit"){
-    const unitArtists=["K.R.Y.","T","Happy","M","D&E","L.S.S.","83Line"];
-
-    artistTabs.innerHTML=unitArtists.map(a=>`
-      <button class="${currentArtist===a?'active':''}" onclick="setArtist('${a}',this)">${a}</button>
-    `).join("");
-  }
-
-  if(currentCat==="Group"){
-    const countries=unique(albums.filter(a=>a.cat==="Group").map(a=>a.country));
+  if(currentMain==="Super Junior"){
+    const countries=Object.keys(structure["Super Junior"].countries);
 
     countryTabs.innerHTML=countries.map(c=>`
       <button class="${currentCountry===c?'active':''}" onclick="setCountry('${c}',this)">${c}</button>
     `).join("");
   }
 
-  if(currentArtist){
-    const countries=unique(albums
-      .filter(a=>a.cat===currentCat && a.artist===currentArtist)
-      .map(a=>a.country));
+  if(currentMember){
+    const countryObj=structure[currentMain].countries[currentMember] || {};
+    const countries=Object.keys(countryObj);
 
     countryTabs.innerHTML=countries.map(c=>`
       <button class="${currentCountry===c?'active':''}" onclick="setCountry('${c}',this)">${c}</button>
@@ -446,13 +501,13 @@ function renderTabs(){
   }
 
   if(currentCountry){
-    const types=unique(albums
-      .filter(a=>
-        a.cat===currentCat &&
-        (!currentArtist || a.artist===currentArtist) &&
-        a.country===currentCountry
-      )
-      .map(a=>a.type));
+    let types=[];
+
+    if(currentMain==="Super Junior"){
+      types=structure["Super Junior"].countries[currentCountry] || [];
+    }else{
+      types=(structure[currentMain].countries[currentMember] || {})[currentCountry] || [];
+    }
 
     typeTabs.innerHTML=types.map(t=>`
       <button class="${currentType===t?'active':''}" onclick="setType('${t}',this)">${t}</button>
@@ -461,25 +516,13 @@ function renderTabs(){
 }
 
 function getList(){
-  let list=albums;
-
-  if(currentCat!=="ALL"){
-    list=list.filter(a=>a.cat===currentCat);
-  }
-
-  if(currentArtist){
-    list=list.filter(a=>a.artist===currentArtist);
-  }
-
-  if(currentCountry){
-    list=list.filter(a=>a.country===currentCountry);
-  }
-
-  if(currentType){
-    list=list.filter(a=>a.type===currentType);
-  }
-
-  return list;
+  return albums.filter(a=>{
+    if(currentMain && a.main!==currentMain) return false;
+    if(currentMember && a.member!==currentMember) return false;
+    if(currentCountry && a.country!==currentCountry) return false;
+    if(currentType && a.type!==currentType) return false;
+    return true;
+  });
 }
 
 function render(){
@@ -489,8 +532,26 @@ function render(){
   grid.innerHTML="";
   albumHeader.innerHTML="";
 
-  if(currentCat!=="ALL" && !currentType){
-    grid.innerHTML=`<div class="empty">請依序選擇子分類</div>`;
+  if(!currentMain){
+    grid.innerHTML=`<div class="empty">請先選擇主項目</div>`;
+    updateProgress();
+    return;
+  }
+
+  if((currentMain==="SOLO" || currentMain==="Unit") && !currentMember){
+    grid.innerHTML=`<div class="empty">請選擇成員或小分隊</div>`;
+    updateProgress();
+    return;
+  }
+
+  if(needsCountry() && !currentCountry){
+    grid.innerHTML=`<div class="empty">請選擇國家</div>`;
+    updateProgress();
+    return;
+  }
+
+  if(needsType() && !currentType){
+    grid.innerHTML=`<div class="empty">請選擇專輯分類</div>`;
     updateProgress();
     return;
   }
@@ -503,20 +564,18 @@ function render(){
     return;
   }
 
-  if(currentType){
-    const albumName=list[0].album;
-    const ownedCount=list.filter(a=>isOwned(a.id)).length;
-    const totalCount=list.length;
-    const albumYear=list[0].year;
+  const albumName=list[0].album;
+  const albumYear=list[0].year;
+  const ownedCount=list.filter(a=>isOwned(a.id)).length;
+  const totalCount=list.length;
 
-    albumHeader.innerHTML=`
-      <div class="albumHeader">
-        <div class="albumTitle">${albumName.toUpperCase()}</div>
-        <div class="albumSub">${currentArtist}｜${currentCountry}｜${currentType}｜${albumYear}</div>
-        <div class="albumProgress">${ownedCount} / ${totalCount} Versions</div>
-      </div>
-    `;
-  }
+  albumHeader.innerHTML=`
+    <div class="albumHeader">
+      <div class="albumTitle">${albumName.toUpperCase()}</div>
+      <div class="albumSub">${currentMember || currentMain}｜${currentCountry || ""}｜${currentType || ""}｜${albumYear}</div>
+      <div class="albumProgress">${ownedCount} / ${totalCount} Versions</div>
+    </div>
+  `;
 
   list.forEach(a=>{
     const owned=isOwned(a.id);
@@ -527,14 +586,14 @@ function render(){
           ${
             a.image
             ? `<img src="${a.image}" class="${owned ? 'owned' : ''}">`
-            : `${a.album}<br>${a.ver}`
+            : `${a.album}<br>${a.version}`
           }
         </div>
 
         <div class="info">
-          <div class="album">${a.ver}</div>
+          <div class="album">${a.version}</div>
           <div class="meta">${a.album}</div>
-          <div class="meta">${a.artist}｜${a.country}｜${a.year}</div>
+          <div class="meta">${a.member || a.main}｜${a.country}｜${a.year}</div>
 
           <button class="heart ${owned ? 'owned' : ''}" onclick="toggle('${a.id}')">
             ${owned ? '♥ 已收藏' : '♡ 未收藏'}
@@ -545,6 +604,32 @@ function render(){
   });
 
   updateProgress();
+}
+
+function needsCountry(){
+  if(currentMain==="Super Junior") return true;
+
+  if(currentMain==="SOLO" || currentMain==="Unit"){
+    const obj=structure[currentMain].countries[currentMember] || {};
+    return Object.keys(obj).length>0;
+  }
+
+  return false;
+}
+
+function needsType(){
+  if(!currentCountry) return false;
+
+  if(currentMain==="Super Junior"){
+    return (structure["Super Junior"].countries[currentCountry] || []).length>0;
+  }
+
+  if(currentMain==="SOLO" || currentMain==="Unit"){
+    const types=(structure[currentMain].countries[currentMember] || {})[currentCountry] || [];
+    return types.length>0;
+  }
+
+  return false;
 }
 
 function updateProgress(){
