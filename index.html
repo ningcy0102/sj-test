@@ -12,32 +12,27 @@ body{
   background:#f5f7fb;
   color:#172033;
 }
-
 header{
   background:#0f2d5c;
   color:white;
   padding:28px 16px 22px;
   text-align:center;
 }
-
 h1{
   margin:0;
   font-size:26px;
   letter-spacing:1px;
 }
-
 .sub{
   margin-top:8px;
   color:#dbeafe;
   font-size:14px;
 }
-
 main{
   max-width:1100px;
   margin:auto;
   padding:18px;
 }
-
 .progressBox{
   background:white;
   border-radius:18px;
@@ -45,13 +40,11 @@ main{
   box-shadow:0 4px 14px #0001;
   margin-bottom:16px;
 }
-
 .progressText{
   font-size:22px;
   font-weight:bold;
   color:#0f2d5c;
 }
-
 .bar{
   height:15px;
   background:#e5e7eb;
@@ -59,21 +52,17 @@ main{
   overflow:hidden;
   margin-top:10px;
 }
-
 .bar div{
   height:100%;
   width:0;
   background:#1d4ed8;
 }
-
 .tabs{
   display:flex;
   gap:8px;
   overflow:auto;
   margin-bottom:12px;
-  padding-bottom:2px;
 }
-
 .tabs button{
   border:0;
   background:white;
@@ -84,33 +73,23 @@ main{
   box-shadow:0 3px 10px #0001;
   white-space:nowrap;
 }
-
 .tabs button.active{
   background:#0f2d5c;
   color:white;
 }
-
 .albumTitle{
   text-align:center;
   color:#0f2d5c;
   font-weight:bold;
-  letter-spacing:4px;
+  letter-spacing:3px;
   margin:22px 0 14px;
-  font-size:20px;
+  font-size:22px;
 }
-
-.sectionLabel{
-  font-weight:bold;
-  color:#0f2d5c;
-  margin:18px 0 10px;
-}
-
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
   gap:14px;
 }
-
 .card{
   background:white;
   border-radius:16px;
@@ -118,7 +97,6 @@ main{
   box-shadow:0 4px 14px #0001;
   border:1px solid #e5e7eb;
 }
-
 .cover{
   height:155px;
   background:linear-gradient(135deg,#0f2d5c,#60a5fa);
@@ -130,7 +108,6 @@ main{
   font-weight:bold;
   padding:12px;
 }
-
 .cover img{
   width:100%;
   height:100%;
@@ -138,27 +115,22 @@ main{
   filter:grayscale(100%) brightness(70%);
   transition:0.3s;
 }
-
 .cover img.owned{
   filter:none;
 }
-
 .info{
   padding:12px;
 }
-
 .album{
   font-weight:bold;
   color:#0f2d5c;
   font-size:15px;
 }
-
 .meta{
   font-size:12px;
   color:#64748b;
   margin-top:4px;
 }
-
 .heart{
   margin-top:10px;
   width:100%;
@@ -169,10 +141,14 @@ main{
   padding:8px;
   font-weight:bold;
 }
-
 .heart.owned{
   background:#1d4ed8;
   color:white;
+}
+.empty{
+  text-align:center;
+  color:#64748b;
+  padding:30px 10px;
 }
 </style>
 </head>
@@ -202,10 +178,8 @@ main{
   <div id="artistTabs" class="tabs"></div>
   <div id="countryTabs" class="tabs"></div>
   <div id="typeTabs" class="tabs"></div>
-  <div id="albumTabs" class="tabs"></div>
 
   <div id="albumTitle" class="albumTitle"></div>
-
   <section id="grid" class="grid"></section>
 
 </main>
@@ -219,21 +193,11 @@ const albums=[
     country:"Korea",
     type:"迷你一輯",
     album:"Here I Am",
-    ver:"通常盤",
+    ver:"Regular",
     year:"2016"
   },
   {
-    id:"yesung-here-i-am-lp",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Korea",
-    type:"迷你一輯",
-    album:"Here I Am",
-    ver:"LP黑膠",
-    year:"2016"
-  },
-  {
-    id:"yesung-spring-falling",
+    id:"yesung-spring-falling-regular",
     cat:"Solo",
     artist:"Yesung",
     country:"Korea",
@@ -265,7 +229,7 @@ const albums=[
     image:"images/pink-magic-pink.jpg"
   },
   {
-    id:"yesung-beautiful-night",
+    id:"yesung-beautiful-night-regular",
     cat:"Solo",
     artist:"Yesung",
     country:"Korea",
@@ -273,26 +237,6 @@ const albums=[
     album:"Beautiful Night",
     ver:"Regular",
     year:"2021"
-  },
-  {
-    id:"yesung-sensory-flows",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Korea",
-    type:"正規一輯",
-    album:"Sensory Flows",
-    ver:"Regular",
-    year:"2023"
-  },
-  {
-    id:"yesung-floral-sense",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Korea",
-    type:"特別專輯",
-    album:"Floral Sense",
-    ver:"Regular",
-    year:"2023"
   },
   {
     id:"yesung-unfading-sense-diary",
@@ -315,7 +259,7 @@ const albums=[
     year:"2023"
   },
   {
-    id:"yesung-its-complicated",
+    id:"yesung-its-complicated-regular",
     cat:"Solo",
     artist:"Yesung",
     country:"Korea",
@@ -325,7 +269,37 @@ const albums=[
     year:"2024"
   },
   {
-    id:"yesung-ame-nochi",
+    id:"yesung-sensory-flows-regular",
+    cat:"Solo",
+    artist:"Yesung",
+    country:"Korea",
+    type:"正規一輯",
+    album:"Sensory Flows",
+    ver:"Regular",
+    year:"2023"
+  },
+  {
+    id:"yesung-floral-sense-regular",
+    cat:"Solo",
+    artist:"Yesung",
+    country:"Korea",
+    type:"特別專輯",
+    album:"Floral Sense",
+    ver:"Regular",
+    year:"2023"
+  },
+  {
+    id:"yesung-story-regular",
+    cat:"Solo",
+    artist:"Yesung",
+    country:"Japan",
+    type:"日本正規一輯",
+    album:"STORY",
+    ver:"Regular",
+    year:"2019"
+  },
+  {
+    id:"yesung-ame-nochi-regular",
     cat:"Solo",
     artist:"Yesung",
     country:"Japan",
@@ -335,7 +309,7 @@ const albums=[
     year:"2016"
   },
   {
-    id:"yesung-splash",
+    id:"yesung-splash-regular",
     cat:"Solo",
     artist:"Yesung",
     country:"Japan",
@@ -343,24 +317,13 @@ const albums=[
     album:"Splash",
     ver:"Regular",
     year:"2017"
-  },
-  {
-    id:"yesung-story",
-    cat:"Solo",
-    artist:"Yesung",
-    country:"Japan",
-    type:"日本正規一輯",
-    album:"STORY",
-    ver:"Regular",
-    year:"2019"
   }
 ];
 
 let currentCat="ALL";
-let currentArtist="ALL";
-let currentCountry="ALL";
-let currentType="ALL";
-let currentAlbum="ALL";
+let currentArtist="";
+let currentCountry="";
+let currentType="";
 
 const key="sj_album_";
 
@@ -379,10 +342,9 @@ function unique(arr){
 
 function setMain(cat,btn){
   currentCat=cat;
-  currentArtist="ALL";
-  currentCountry="ALL";
-  currentType="ALL";
-  currentAlbum="ALL";
+  currentArtist="";
+  currentCountry="";
+  currentType="";
 
   document.querySelectorAll("main > .tabs:first-of-type button").forEach(b=>b.classList.remove("active"));
   btn.classList.add("active");
@@ -393,9 +355,8 @@ function setMain(cat,btn){
 
 function setArtist(artist,btn){
   currentArtist=artist;
-  currentCountry="ALL";
-  currentType="ALL";
-  currentAlbum="ALL";
+  currentCountry="";
+  currentType="";
 
   document.querySelectorAll("#artistTabs button").forEach(b=>b.classList.remove("active"));
   btn.classList.add("active");
@@ -406,8 +367,7 @@ function setArtist(artist,btn){
 
 function setCountry(country,btn){
   currentCountry=country;
-  currentType="ALL";
-  currentAlbum="ALL";
+  currentType="";
 
   document.querySelectorAll("#countryTabs button").forEach(b=>b.classList.remove("active"));
   btn.classList.add("active");
@@ -418,71 +378,25 @@ function setCountry(country,btn){
 
 function setType(type,btn){
   currentType=type;
-  currentAlbum="ALL";
 
   document.querySelectorAll("#typeTabs button").forEach(b=>b.classList.remove("active"));
   btn.classList.add("active");
 
-  renderTabs();
   render();
-}
-
-function setAlbum(album,btn){
-  currentAlbum=album;
-
-  document.querySelectorAll("#albumTabs button").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-
-  render();
-}
-
-function baseList(){
-  let list=albums;
-
-  if(currentCat!=="ALL"){
-    list=list.filter(a=>a.cat===currentCat);
-  }
-
-  if(currentArtist!=="ALL"){
-    list=list.filter(a=>a.artist===currentArtist);
-  }
-
-  if(currentCountry!=="ALL"){
-    list=list.filter(a=>a.country===currentCountry);
-  }
-
-  if(currentType!=="ALL"){
-    list=list.filter(a=>a.type===currentType);
-  }
-
-  return list;
-}
-
-function filteredList(){
-  let list=baseList();
-
-  if(currentAlbum!=="ALL"){
-    list=list.filter(a=>a.album===currentAlbum);
-  }
-
-  return list;
 }
 
 function renderTabs(){
   const artistTabs=document.getElementById("artistTabs");
   const countryTabs=document.getElementById("countryTabs");
   const typeTabs=document.getElementById("typeTabs");
-  const albumTabs=document.getElementById("albumTabs");
 
   artistTabs.innerHTML="";
   countryTabs.innerHTML="";
   typeTabs.innerHTML="";
-  albumTabs.innerHTML="";
 
   if(currentCat==="Solo"){
     artistTabs.innerHTML=`
-      <button class="${currentArtist==='ALL'?'active':''}" onclick="setArtist('ALL',this)">ALL SOLO</button>
-      <button class="${currentArtist==='Yesung'?'active':''}" onclick="setArtist('Yesung',this)">Yesung</button>
+      <button onclick="setArtist('Yesung',this)">Yesung</button>
       <button onclick="setArtist('Kyuhyun',this)">Kyuhyun</button>
       <button onclick="setArtist('Ryeowook',this)">Ryeowook</button>
       <button onclick="setArtist('Donghae',this)">Donghae</button>
@@ -492,7 +406,6 @@ function renderTabs(){
 
   if(currentCat==="Unit"){
     artistTabs.innerHTML=`
-      <button class="${currentArtist==='ALL'?'active':''}" onclick="setArtist('ALL',this)">ALL UNIT</button>
       <button onclick="setArtist('D&E',this)">D&E</button>
       <button onclick="setArtist('K.R.Y.',this)">K.R.Y.</button>
       <button onclick="setArtist('M',this)">M</button>
@@ -502,41 +415,58 @@ function renderTabs(){
     `;
   }
 
-  if(currentCat==="Group" || currentArtist!=="ALL"){
-    const countries=unique(baseList().map(a=>a.country));
-    if(countries.length>0){
-      countryTabs.innerHTML=`
-        <button class="${currentCountry==='ALL'?'active':''}" onclick="setCountry('ALL',this)">ALL COUNTRY</button>
-        ${countries.map(c=>`
-          <button class="${currentCountry===c?'active':''}" onclick="setCountry('${c}',this)">${c}</button>
-        `).join("")}
-      `;
-    }
+  if(currentCat==="Group"){
+    const countries=unique(albums.filter(a=>a.cat==="Group").map(a=>a.country));
+    countryTabs.innerHTML=countries.map(c=>`
+      <button onclick="setCountry('${c}',this)">${c}</button>
+    `).join("");
   }
 
-  if(currentCountry!=="ALL"){
-    const types=unique(baseList().map(a=>a.type));
-    if(types.length>0){
-      typeTabs.innerHTML=`
-        <button class="${currentType==='ALL'?'active':''}" onclick="setType('ALL',this)">ALL TYPE</button>
-        ${types.map(t=>`
-          <button class="${currentType===t?'active':''}" onclick="setType('${t}',this)">${t}</button>
-        `).join("")}
-      `;
-    }
+  if(currentArtist){
+    const countries=unique(albums
+      .filter(a=>a.cat===currentCat && a.artist===currentArtist)
+      .map(a=>a.country));
+
+    countryTabs.innerHTML=countries.map(c=>`
+      <button onclick="setCountry('${c}',this)">${c}</button>
+    `).join("");
   }
 
-  if(currentType!=="ALL"){
-    const albumNames=unique(baseList().map(a=>a.album));
-    if(albumNames.length>0){
-      albumTabs.innerHTML=`
-        <button class="${currentAlbum==='ALL'?'active':''}" onclick="setAlbum('ALL',this)">ALL ALBUM</button>
-        ${albumNames.map(a=>`
-          <button class="${currentAlbum===a?'active':''}" onclick="setAlbum('${a}',this)">${a}</button>
-        `).join("")}
-      `;
-    }
+  if(currentCountry){
+    const types=unique(albums
+      .filter(a=>
+        a.cat===currentCat &&
+        (!currentArtist || a.artist===currentArtist) &&
+        a.country===currentCountry
+      )
+      .map(a=>a.type));
+
+    typeTabs.innerHTML=types.map(t=>`
+      <button onclick="setType('${t}',this)">${t}</button>
+    `).join("");
   }
+}
+
+function getList(){
+  let list=albums;
+
+  if(currentCat!=="ALL"){
+    list=list.filter(a=>a.cat===currentCat);
+  }
+
+  if(currentArtist){
+    list=list.filter(a=>a.artist===currentArtist);
+  }
+
+  if(currentCountry){
+    list=list.filter(a=>a.country===currentCountry);
+  }
+
+  if(currentType){
+    list=list.filter(a=>a.type===currentType);
+  }
+
+  return list;
 }
 
 function render(){
@@ -544,13 +474,24 @@ function render(){
   const title=document.getElementById("albumTitle");
 
   grid.innerHTML="";
+  title.innerHTML="";
 
-  const list=filteredList();
+  if(currentCat!=="ALL" && !currentType){
+    grid.innerHTML=`<div class="empty">請選擇分類</div>`;
+    updateProgress();
+    return;
+  }
 
-  if(currentAlbum!=="ALL"){
-    title.innerText=currentAlbum.toUpperCase();
-  }else{
-    title.innerText="";
+  const list=getList();
+
+  if(currentType && list.length>0){
+    title.innerText=list[0].album.toUpperCase();
+  }
+
+  if(list.length===0){
+    grid.innerHTML=`<div class="empty">目前沒有資料</div>`;
+    updateProgress();
+    return;
   }
 
   list.forEach(a=>{
@@ -594,5 +535,6 @@ function updateProgress(){
 renderTabs();
 render();
 </script>
+
 </body>
 </html>
