@@ -77,13 +77,29 @@ main{
   background:#0f2d5c;
   color:white;
 }
-.albumTitle{
+.albumHeader{
+  background:white;
+  border-radius:18px;
+  padding:18px;
   text-align:center;
+  box-shadow:0 4px 14px #0001;
+  margin:18px 0 16px;
+}
+.albumTitle{
   color:#0f2d5c;
   font-weight:bold;
   letter-spacing:3px;
-  margin:22px 0 14px;
-  font-size:22px;
+  font-size:24px;
+}
+.albumSub{
+  color:#64748b;
+  font-size:13px;
+  margin-top:6px;
+}
+.albumProgress{
+  margin-top:10px;
+  font-weight:bold;
+  color:#1d4ed8;
 }
 .grid{
   display:grid;
@@ -179,7 +195,8 @@ main{
   <div id="countryTabs" class="tabs"></div>
   <div id="typeTabs" class="tabs"></div>
 
-  <div id="albumTitle" class="albumTitle"></div>
+  <div id="albumHeader"></div>
+
   <section id="grid" class="grid"></section>
 
 </main>
@@ -395,30 +412,26 @@ function renderTabs(){
   typeTabs.innerHTML="";
 
   if(currentCat==="Solo"){
-    artistTabs.innerHTML=`
-      <button onclick="setArtist('Yesung',this)">Yesung</button>
-      <button onclick="setArtist('Kyuhyun',this)">Kyuhyun</button>
-      <button onclick="setArtist('Ryeowook',this)">Ryeowook</button>
-      <button onclick="setArtist('Donghae',this)">Donghae</button>
-      <button onclick="setArtist('Eunhyuk',this)">Eunhyuk</button>
-    `;
+    const soloArtists=["Heechul","Yesung","Eunhyuk","Donghae","Ryeowook","Kyuhyun"];
+
+    artistTabs.innerHTML=soloArtists.map(a=>`
+      <button class="${currentArtist===a?'active':''}" onclick="setArtist('${a}',this)">${a}</button>
+    `).join("");
   }
 
   if(currentCat==="Unit"){
-    artistTabs.innerHTML=`
-      <button onclick="setArtist('D&E',this)">D&E</button>
-      <button onclick="setArtist('K.R.Y.',this)">K.R.Y.</button>
-      <button onclick="setArtist('M',this)">M</button>
-      <button onclick="setArtist('T',this)">T</button>
-      <button onclick="setArtist('H',this)">H</button>
-      <button onclick="setArtist('L.S.S.',this)">L.S.S.</button>
-    `;
+    const unitArtists=["K.R.Y.","T","Happy","M","D&E","L.S.S.","83Line"];
+
+    artistTabs.innerHTML=unitArtists.map(a=>`
+      <button class="${currentArtist===a?'active':''}" onclick="setArtist('${a}',this)">${a}</button>
+    `).join("");
   }
 
   if(currentCat==="Group"){
     const countries=unique(albums.filter(a=>a.cat==="Group").map(a=>a.country));
+
     countryTabs.innerHTML=countries.map(c=>`
-      <button onclick="setCountry('${c}',this)">${c}</button>
+      <button class="${currentCountry===c?'active':''}" onclick="setCountry('${c}',this)">${c}</button>
     `).join("");
   }
 
@@ -428,7 +441,7 @@ function renderTabs(){
       .map(a=>a.country));
 
     countryTabs.innerHTML=countries.map(c=>`
-      <button onclick="setCountry('${c}',this)">${c}</button>
+      <button class="${currentCountry===c?'active':''}" onclick="setCountry('${c}',this)">${c}</button>
     `).join("");
   }
 
@@ -442,7 +455,7 @@ function renderTabs(){
       .map(a=>a.type));
 
     typeTabs.innerHTML=types.map(t=>`
-      <button onclick="setType('${t}',this)">${t}</button>
+      <button class="${currentType===t?'active':''}" onclick="setType('${t}',this)">${t}</button>
     `).join("");
   }
 }
@@ -471,27 +484,38 @@ function getList(){
 
 function render(){
   const grid=document.getElementById("grid");
-  const title=document.getElementById("albumTitle");
+  const albumHeader=document.getElementById("albumHeader");
 
   grid.innerHTML="";
-  title.innerHTML="";
+  albumHeader.innerHTML="";
 
   if(currentCat!=="ALL" && !currentType){
-    grid.innerHTML=`<div class="empty">請選擇分類</div>`;
+    grid.innerHTML=`<div class="empty">請依序選擇子分類</div>`;
     updateProgress();
     return;
   }
 
   const list=getList();
 
-  if(currentType && list.length>0){
-    title.innerText=list[0].album.toUpperCase();
-  }
-
   if(list.length===0){
     grid.innerHTML=`<div class="empty">目前沒有資料</div>`;
     updateProgress();
     return;
+  }
+
+  if(currentType){
+    const albumName=list[0].album;
+    const ownedCount=list.filter(a=>isOwned(a.id)).length;
+    const totalCount=list.length;
+    const albumYear=list[0].year;
+
+    albumHeader.innerHTML=`
+      <div class="albumHeader">
+        <div class="albumTitle">${albumName.toUpperCase()}</div>
+        <div class="albumSub">${currentArtist}｜${currentCountry}｜${currentType}｜${albumYear}</div>
+        <div class="albumProgress">${ownedCount} / ${totalCount} Versions</div>
+      </div>
+    `;
   }
 
   list.forEach(a=>{
